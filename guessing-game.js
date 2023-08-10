@@ -7,6 +7,8 @@ const rl = readline.createInterface({
 
 let secretNumber = randomInRange(0, 100)
 
+let numAttempts = 5;
+
 function randomInRange(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -38,7 +40,17 @@ function askGuess() {
         if (checkGuess(Number(answer)) === true) {
             rl.close();
         }
-        else askGuess();
+        else {
+
+            askGuess();
+            numAttempts--;
+            console.log("Attempts left: " + numAttempts);
+            if (numAttempts === 0) {
+                console.log("Too many attempts! You Lose.");
+                rl.close();
+            }
+
+        }
     });
 
 
